@@ -5,25 +5,6 @@ const app = express()
 // 載入 express-handlebars
 const exphbs = require('express-handlebars')
 
-// 建立變數，當參數來帶入渲染的頁面
-const navbar = [
-  {
-    title: '首頁'
-  },
-  {
-    title: 'About',
-    activeAbout: 'active'
-  },
-  {
-    title: 'Portfolio',
-    activePortfolio: 'active'
-  },
-  {
-    title: 'Contact',
-    activeContact: 'active'
-  }
-]
-
 // 連接埠號
 const port = 3000
 
@@ -36,20 +17,21 @@ app.use(express.static('public'))
 
 // 處理請求和回應
 app.get('/', (req, res) => {
-  res.render('index', navbar[0])
+  res.render('index', { title: '首頁' })
 })
 
-// 處理個別頁面的請求和回應
-app.get('/about', (req, res) => {
-  res.render('index', navbar[1])
-})
+// 動態處理訪問的頁面的請求和回應
+app.get('/:page', (req, res) => {
+  const pages = ['about', 'portfolio', 'contact']
+  // 將字串開頭變大寫，回傳指定範圍內的字串
+  const capitalize = (str) => str[0].toUpperCase() + str.substring(1)
 
-app.get('/portfolio', (req, res) => {
-  res.render('index', navbar[2])
-})
-
-app.get('/contact', (req, res) => {
-  res.render('index', navbar[3])
+  // 判斷當前訪問的頁面是否存在，不存在就導回首頁
+  if (pages.includes(req.params.page)) {
+    res.render('index', { title: capitalize(req.params.page) })
+  } else {
+    res.render('index', { title: '首頁' })
+  }
 })
 
 // 啟動並監聽伺服器

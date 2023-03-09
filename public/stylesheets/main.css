@@ -44,8 +44,7 @@ a {
   transition: .3s ease-out;
 }
 
-.nav-link:hover,
-.active {
+.nav-link:hover {
   color: #fff;
   background-color: #000;
 }
