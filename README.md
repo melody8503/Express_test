@@ -18,8 +18,8 @@
   ```
   nodemon app.js
   ```
-terminal 顯示以下網址表示啟動成功，打開瀏覽器進入此網址
-http://localhost:3000
+terminal 顯示網址 http://localhost:3000 表示啟動成功，打開瀏覽器進入此網址
+
 
 
 ### Prerequisites 環境建置與需求
